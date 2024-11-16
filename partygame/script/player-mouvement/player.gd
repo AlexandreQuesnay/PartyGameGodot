@@ -38,3 +38,11 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_host_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_join_button_pressed() -> void:
+	pass # Replace with function body.

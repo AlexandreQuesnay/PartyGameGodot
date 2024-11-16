@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdi44opeolwcv"]
+[gd_scene load_steps=9 format=3 uid="uid://bdi44opeolwcv"]
 
 [ext_resource type="PackedScene" uid="uid://tg3467c7pxas" path="res://player-controller.tscn" id="1_sp6oi"]
+[ext_resource type="Script" path="res://script/world.gd" id="1_t1tb3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5so7c"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,13 +17,14 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xryii"]
-size = Vector2(10, 10)
+size = Vector2(30, 30)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t6vvu"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xqyyc"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_t1tb3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a5qk0")
@@ -41,3 +43,49 @@ physics_material_override = SubResource("PhysicsMaterial_t6vvu")
 shape = SubResource("WorldBoundaryShape3D_xqyyc")
 
 [node name="Player" parent="." instance=ExtResource("1_sp6oi")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1130.0
+offset_top = 625.0
+offset_right = -1130.0
+offset_bottom = -624.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AdressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter adress to join here"
+alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
