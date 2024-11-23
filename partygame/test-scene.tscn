@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdi44opeolwcv"]
+[gd_scene load_steps=8 format=3 uid="uid://bdi44opeolwcv"]
 
-[ext_resource type="PackedScene" uid="uid://tg3467c7pxas" path="res://player-controller.tscn" id="1_sp6oi"]
 [ext_resource type="Script" path="res://script/world.gd" id="1_t1tb3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5so7c"]
@@ -41,8 +40,6 @@ physics_material_override = SubResource("PhysicsMaterial_t6vvu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_xqyyc")
-
-[node name="Player" parent="." instance=ExtResource("1_sp6oi")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -87,6 +84,10 @@ text = "Join"
 layout_mode = 2
 placeholder_text = "Enter adress to join here"
 alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player-controller.tscn")
+spawn_path = NodePath("..")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
